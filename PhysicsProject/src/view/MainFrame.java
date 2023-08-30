@@ -1,99 +1,93 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
  *
- * @author Diego Patiño
+ * @author Juan David Carrillo Parra
  */
-public class MainFrame {
-     private JLabel txtDensity;
-    private JLabel txtPressureInit;
-    private JLabel txtHeight;
-    private JTextField density;
-    private JTextField pressureInt;
-    private JTextField height;
+public class MainFrame extends JFrame {
+
+    private JLabel heading;
+    private JLabel txtForce;
+    private JLabel txtArea;
+    private JLabel txtResult;
+    private JPanel calculatePanel;
+    private JPanel buttonsPanel;
+    private JTextField inputForce;
+    private JTextField inputArea;
+    private JTextField outputResult;
     private JButton calculate;
     private JButton convert;
 
     public MainFrame(ActionListener listener) {
-        setBackground(Color.LIGHT_GRAY);
+        super("Proyecto Fisica");
+        this.setBackground(Color.LIGHT_GRAY);
         this.initComponents(listener);
-        setSize(400, 300);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        this.setSize(400, 300);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
     public void initComponents(ActionListener listener) {
-        this.setLayout(new GridLayout(4, 2));
-        txtDensity = new JLabel("Ingrese la densidad");
-        txtPressureInit = new JLabel("Ingrese la presion inicial");
-        txtHeight = new JLabel("Ingrese la altura");
-        density = new JTextField(15);
-        pressureInt = new JTextField(15);
-        height = new JTextField(15);
-        calculate = new JButton("Calcular");
+        this.setLayout(new BorderLayout());
+        this.initCPanel();
+        this.add(heading, BorderLayout.NORTH);
+        this.add(calculatePanel, BorderLayout.CENTER);
+        this.initBPanel(listener);
+        this.add(buttonsPanel, BorderLayout.SOUTH);
+    }
+
+    private void initCPanel() {
+        heading = new JLabel("<HTML><H2>Calculadora de Presiones</H2></HTML>");
+        txtForce = new JLabel("<HTML><H3>Ingrese la fuerza (N)</H3></HTML>");
+        txtArea = new JLabel("<HTML><H3>Ingrese el area (m^2)</H3></HTML>");
+        txtResult = new JLabel("<HTML><H3>La presion es igual a </H3></HTML>");
+        calculatePanel = new JPanel(new GridLayout(3, 2));
+        buttonsPanel = new JPanel(new GridLayout(1, 2));
+        inputForce = new JTextField(15);
+        inputArea = new JTextField(15);
+        outputResult = new JTextField(15);
+        outputResult.setEnabled(false);
+        calculatePanel.add(txtForce);
+        calculatePanel.add(inputForce);
+        calculatePanel.add(txtArea);
+        calculatePanel.add(inputArea);
+        calculatePanel.add(txtResult);
+        calculatePanel.add(outputResult);
+    }
+
+    private void initBPanel(ActionListener listener) {
+        calculate = new JButton("<HTML><H3>Calcular</H3></HTML>");
         calculate.addActionListener(listener);
         calculate.setActionCommand("calculate");
-        convert = new JButton("Convertir unidades");
+        convert = new JButton("<HTML><H3>Convertir unidades</H3></HTML>");
         convert.addActionListener(listener);
         convert.setActionCommand("convert");
-
-        this.add(txtDensity);
-        this.add(density);
-        this.add(txtHeight);
-        this.add(height);
-        this.add(txtPressureInit);
-        this.add(pressureInt);
-        this.add(calculate);
-        this.add(convert);
-
+        buttonsPanel.add(calculate);
+        buttonsPanel.add(convert);
     }
 
-    private void setBackground(Color LIGHT_GRAY) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String getForce() {
+        return inputForce.getText();
     }
 
-    private void setSize(int i, int i0) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String getArea() {
+        return inputArea.getText();
     }
 
-    private void setLocationRelativeTo(Object object) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void setResult(String message) {
+        outputResult.setText(message);
     }
-
-    private void setDefaultCloseOperation(int EXIT_ON_CLOSE) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setVisible(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void setLayout(GridLayout gridLayout) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void add(JLabel txtDensity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void add(JTextField density) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void add(JButton calculate) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
+    
 }
